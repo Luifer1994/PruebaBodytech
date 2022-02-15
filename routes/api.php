@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SaleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -28,7 +29,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::delete('cart-destroy/{product_id}', 'destroy');
         Route::get('cart-detail', 'detail');
     });
-
+    //Compras
+    Route::post('sales-store', [SaleController::class, 'store']);
     //Cerrar sesión
     Route::get('user-logout', [UserController::class, 'logout']);
 });

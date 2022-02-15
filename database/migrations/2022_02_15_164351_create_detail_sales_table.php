@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('detail_sales', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->constrained('products');
+            $table->foreignId('sale_id')->constrained('sales');
             $table->integer('quantity');
             $table->timestamps();
         });
