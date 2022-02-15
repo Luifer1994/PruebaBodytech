@@ -23,7 +23,11 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::post('user-store-for-admin', [UserController::class, 'storeAdmin']);
     });
     //Carrito
-    Route::post('cart-store', [CartController::class, 'store']);
+    Route::controller(CartController::class)->group(function () {
+        Route::post('cart-store', 'store');
+        Route::delete('cart-destroy/{product_id}', 'destroy');
+    });
+
     //Cerrar sesión
     Route::get('user-logout', [UserController::class, 'logout']);
 });

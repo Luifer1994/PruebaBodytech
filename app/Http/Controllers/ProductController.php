@@ -24,9 +24,6 @@ class ProductController extends Controller
                 "message"  => 'Error de importación'
             ], 400);
         }
-
-
-        return "ok";
     }
     public function index(Request $request)
     {
