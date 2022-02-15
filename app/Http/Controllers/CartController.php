@@ -6,6 +6,7 @@ use App\Http\Requests\CartRequest;
 use App\Models\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
@@ -64,8 +65,20 @@ class CartController extends Controller
         } else {
             return response()->json([
                 'res' => false,
-                'message' => 'El producto enviado no esta agregado en el carrito'
+                'message' => 'El producto enviado no está agregado en el carrito'
             ], 400);
         }
+    }
+
+    public function detail()
+    {
+        $data = Cart::select('carts.product_id', 'carts.quantity', 'products.name', 'products.price')
+            ->join('products', 'carts.product_id', '=', 'products.id')
+            ->where('carts.user_id', Auth::user()->id)->get();
+
+        return response()->json([
+            'res' => true,
+            'data' => $data
+        ]);
     }
 }
