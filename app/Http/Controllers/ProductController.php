@@ -5,9 +5,29 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProductRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Imports\ProductImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
 {
+
+    public function import(Request $request)
+    {
+        if (Excel::import(new ProductImport, $request->products)) {
+            return response()->json([
+                "res"   => true,
+                "message"  => 'Importación exitosa'
+            ], 200);
+        } else {
+            return response()->json([
+                "res"   => false,
+                "message"  => 'Error de importación'
+            ], 400);
+        }
+
+
+        return "ok";
+    }
     public function index(Request $request)
     {
         $request["limit"] ? $limit = $request["limit"] : $limit = 10;

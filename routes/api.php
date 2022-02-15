@@ -17,6 +17,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
             Route::get('products-list{limit?}', 'index');
             Route::post('products-store', 'store');
             Route::put('products-update/{id}', 'update');
+            Route::post('products-import', 'import');
         });
         //Registro de usuarios por admin
         Route::post('user-store-for-admin', [UserController::class, 'storeAdmin']);
