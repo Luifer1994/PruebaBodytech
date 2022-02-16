@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ImportProductRequest;
 use App\Http\Requests\ProductRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -11,7 +12,7 @@ use Maatwebsite\Excel\Facades\Excel;
 class ProductController extends Controller
 {
 
-    public function import(Request $request)
+    public function import(ImportProductRequest $request)
     {
         if (Excel::import(new ProductImport, $request->products)) {
             return response()->json([
