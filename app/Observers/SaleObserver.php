@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class SaleObserver
 {
-
+    //Antes de guardar
     public function creating(Sale $sale)
     {
         $sale->user_id = Auth::user()->id;
@@ -19,7 +19,7 @@ class SaleObserver
             $sale->total    += $product->price * $value->quantity;
         }
     }
-
+    //Despues de guardar
     public function created(Sale $sale)
     {
         $data = Auth::user()->cart;

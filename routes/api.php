@@ -22,6 +22,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         });
         //Registro de usuarios por admin
         Route::post('user-store-for-admin', [UserController::class, 'storeAdmin']);
+        //Comopras
+        Route::get('sale-report{start_date?}{finish_date?}', [SaleController::class, 'report']);
     });
     //Carrito
     Route::controller(CartController::class)->group(function () {
